@@ -1,11 +1,11 @@
 const mongoose =require("mongoose")
 const companyInformation=mongoose.Schema({
-  Companyname:{type:String,require:true},
+  Companyname:{type:String,required:true},
   companyPicture:{type:String},
-companyDomain:{type:String,require:true},
-phoneNo:{type:String,require:true},
-country:{type:String,require:true},
-address:{type:String,require:true},
+companyDomain:{type:String,required:true},
+phoneNo:{type:String,required:true},
+country:{type:String,required:true},
+address:{type:String,required:true},
 numberOfEmployee:{type:Number}
 })
 
