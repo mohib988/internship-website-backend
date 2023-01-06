@@ -1,4 +1,3 @@
-const mongoose=require("mongoose")
 const companyInformation=require("../models/companyInformation.js")
 
 const createCompanyProfile=async (req,res)=>{

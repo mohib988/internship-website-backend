@@ -1,4 +1,3 @@
-const mongoose=require("mongoose")
 const userInformation=require("../models/userinfo.js")
 
 const createProfile=async (req,res)=>{

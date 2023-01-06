@@ -1,4 +1,3 @@
-const mongoose=require("mongoose")
 const projectModel=require("../models/project")
 const courseModel=require("../models/course")
 

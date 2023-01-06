@@ -1,4 +1,3 @@
-const mongoose=require("mongoose")
 const experienceModel=require("../models/experience")
 const educationModel=require("../models/education");
 const { json } = require("express");

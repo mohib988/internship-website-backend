@@ -2,34 +2,45 @@ const jwt= require("jsonwebtoken");
 
 
 const  mongoose  = require("mongoose");
-const UserModal=require("../models/user.js")
+const UserModel=require("../models/user.js")
 const secret="test"
 
 
 
-// const signin=(req,res)=>{
+const signin=async (req,res)=>{
+    const {email,password}=req.body
+  try {
     
-// }
+    const user=await UserModel.findOne({email,password}) 
+    if (!user) return res.status(404).json({ message: "User doesn't exist" });
+
+const token = jwt.sign({ email: user.email, id: user._id }, secret, { expiresIn: "1h" });
+res.status(200).json({result:user,token})
+
+  } catch (error) {
+    
+  }
+}
 const signup= async (req,res)=>{
-    // const { email, password, firstName, lastName } = req.body;
-// const image=req.file.path
-// res.status(201).json({image})
-    // try {
-    //   const oldUser = await UserModal.findOne({ email });
+    const { email, password, firstName, lastName } = req.body;
+const image=req.file.path
+res.status(201).json({image})
+    try {
+      const oldUser = await UserModel.findOne({ email });
   
-    //   if (oldUser) return res.status(400).json({ message: "User already exists" });
+      if (oldUser) return res.status(400).json({ message: "User already exists" });
   
   
-    //   const result = await UserModal.create({ email, password: password, name: `${firstName} ${lastName}` });
+      const result = await UserModel.create({ email, password: password, name: `${firstName} ${lastName}` });
   
-    //   const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
+      const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
   
-    //   res.status(201).json({ result, token });
-    // } catch (error) {
-    //   res.status(500).json({ message: "Error" });
+      res.status(201).json({ result, token });
+    } catch (error) {
+      res.status(500).json({ message: "Error" });
       
-    //   console.log(error);
-    // }
+      console.log(error);
+    }
   };
 
 module.exports={signup}

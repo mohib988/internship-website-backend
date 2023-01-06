@@ -1,4 +1,3 @@
-const mongoose =require("mongoose")
 const postModel=require("../models/intershipPost.js")
 const createJobPost=async (req,res)=>{ try {
     
@@ -32,16 +31,20 @@ const deleteJobPost=async (req,res)=>{ try {
  res.status.json({error})   
 }
  }
+//? what is the question
+//todo the is due on me
+//* the is due on me
 
-const searchJobPost=async (req,res)=>{ try {
+const searchJobPost=async (req,res)=>{ 
+    try {
     
     // const {id,jobDescription,jobTitle,remote,location,paid,price,companyId,jobRequirement,contactNo}=req.body
     const {title}=req.query
-    const searchedJobPost=await find({jobTitle:{$regex:new RegExp(`$.*{title}.*`,"gi")}})
+    const searchedJobPost=await postModel.find({jobTitle:{$regex:new RegExp(`.*${title}.*`,"gi")}})
     
     res.status(201).json({data:searchedJobPost})
 } catch (error) {
- res.status.json({error})   
+ res.status(404).json({error})   
 }
  }
 
