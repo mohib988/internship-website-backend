@@ -3,7 +3,8 @@ const company=require("./companyInformation.js")
 
 const postModel=mongoose.Schema({
 companyId:{type:mongoose.SchemaTypes.ObjectId,required:true,ref:company},
-jobTitle:{type:String,required:true},
+jobTitle:{type: String,
+  set: (val) => ucfirst(val)},
 jobDescription:{type:String,required:true},
 jobRequirements:{type:String},
 remote:{ type: Boolean,
@@ -15,7 +16,7 @@ remote:{ type: Boolean,
   },
 paid:{
     type: Boolean,
-    required: true   
+    required:  true
 }
 , price: {
     type: Number,
