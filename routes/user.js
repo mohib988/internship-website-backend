@@ -10,14 +10,23 @@ const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../cont
 
 
 // router.post("/signup",upload.single("image"),signup)
-// router.post("/addcourse",addProjectOrCourse)
-router.post("/addeducation",addEducationOrExperience)
 // router.post("/createprofile",upload.single("image"),createProfile)
-router.post("/deleteprojectorcourse/:userId",deleteProjectOrCourse)
+
+//* course and project crud
+router.post("/addProjectAndCourse",addProjectOrCourse)
+router.post("/deleteProjectAndCourse/:id",deleteProjectOrCourse)
+router.post("/updateProjectAndCourse/:id",updateProjectOrCourse)
 router.post("/uploadpdf",uploadPdf.single("pdf"),uploadMyPdf)
 
-// router.post("/updateproject/:id",updateProject)
-router.post("/updateeducationorexperience",updateEducationOrExperience)
+
+//* education and experience crud
+
+router.post("/addEducationAndExperience",addEducationOrExperience)
+router.post("/updateEducationAndExperience/:id",updateEducationOrExperience)
+router.post("/deleteeducationAndexperience/:id",deleteEducationOrExperience)
+
+
+//*skill and summary crud
 router.post("/createSkillAndSummary",createSkillAndSummary)
 router.post("/updateSkillAndSummary",updateSkillAndSummary)
 router.post("/deleteSkill",deleteSkill)

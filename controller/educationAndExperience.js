@@ -1,3 +1,4 @@
+const mongoose=require("mongoose")
 const experienceModel=require("../models/experience")
 const educationModel=require("../models/education");
 const { json } = require("express");
@@ -8,8 +9,10 @@ const addEducationOrExperience = async (req, res) => {
     try {
       
 
+      req.body.startingDate = new Date(req.body.startingDate);
+    req.body.endingDate = new Date(req.body.endingDate);
       const { type, userId } = req.body;
-    
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`No post with id}`);
       // Determine which model to use based on the type
       const models = { experience: experienceModel, education: educationModel };
       const model = models[type];
@@ -26,7 +29,7 @@ const addEducationOrExperience = async (req, res) => {
       res.status(201).json({ data: updatedDocument });
     } catch (error) {
       res.status(401).json({data: "something wrong " });
-      
+      console.log(error)
     }
   };
 
@@ -34,9 +37,10 @@ const addEducationOrExperience = async (req, res) => {
     try {
       
       // Extract the type, id, and userId from the request body and params
-      const { type, userId,id } = req.body;
+      const { type, userId} = req.body;
+      const { id} = req.params;
 
-    
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`No post with id}`);
       // Determine which model to use based on the type
 
       const models = { experience: experienceModel, education: educationModel };
@@ -48,16 +52,14 @@ const addEducationOrExperience = async (req, res) => {
   
       // Update the appropriate array in the document
       const updated = object[type + 's'].map((i) => {
-        if (i._id.equals(id)) {
-          i.institute = req.body.institute;
+        if ((i._id).equals(id)) {
+          i.instituteName = req.body.instituteName;
           i.startingDate = req.body.startingDate;
           i.endingDate = req.body.endingDate;
-          i.description = req.body.description;
-          console.log("helrh")
+          i.description = req.body.description;   
         }
         return i;
       });
-    console.log(updated)
       // Update the document in the database
       const updatedDocument = await model.findOneAndUpdate(
         { userId: userId },
@@ -81,6 +83,7 @@ const addEducationOrExperience = async (req, res) => {
       // Extract the type, id, and userId from the request body and params
       const { type,userId } = req.body;
       const { id } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`No post with id}`);
     
       // Determine which model to use based on the type
       const models = { experience: experienceModel, education: educationModel };
@@ -98,7 +101,7 @@ const addEducationOrExperience = async (req, res) => {
     
       // Update the document in the database
       const updatedDocument = await model.findOneAndUpdate(
-        { _id: userId },
+        { userId: userId },
         { $set: { [type + 's']: updated } },
         { new: true }
       );

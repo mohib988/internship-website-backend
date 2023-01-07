@@ -1,5 +1,5 @@
 const postModel=require("../models/intershipPost.js")
-
+const mongoose=require("mongoose")
 const getJobPost=async (req,res)=>{ 
     try {
     const {page}=req.query
@@ -29,6 +29,7 @@ const createJobPost=async (req,res)=>{ try {
     }
 const updateJobPost=async (req,res)=>{ try {
     const {id}=req.params
+
     const updatedJobPost=await postModel.findOneAndUpdate({_id:id},{$set:{...req.body}},{new:true})
     
     res.status(201).json({data:updatedJobPost})
@@ -41,6 +42,7 @@ const deleteJobPost=async (req,res)=>{ try {
     
     // const {id,jobDescription,jobTitle,remote,location,paid,price,companyId,jobRequirement,contactNo}=req.body
     const {id}=req.params
+
     const updatedJobPost=await postModel.findByIdAndDelete({_id:id})
     
     res.status(201).json({data:"post successfully deleted"})

@@ -1,14 +1,14 @@
 const projectModel=require("../models/project")
 const courseModel=require("../models/course")
 
-
+const mongoose=require("mongoose")
 
 const addProjectOrCourse = async (req, res) => {
     try {
       
 
       const { type, userId } = req.body;
-    
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`ERROR`);
       // Determine which model to use based on the type
       const models = { project: projectModel, course: courseModel };
       const model = models[type];
@@ -35,6 +35,7 @@ const addProjectOrCourse = async (req, res) => {
       // Extract the type, id, and userId from the request body and params
       const { type, userId } = req.body;
       const { id} = req.params;
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`ERROR`);
     
       // Determine which model to use based on the type
       const models = { project: projectModel, course: courseModel };
@@ -46,7 +47,7 @@ const addProjectOrCourse = async (req, res) => {
     
       // Update the appropriate array in the document
       const updated = object[type + 's'].map((i) => {
-        if (i._id.equals(id)) {
+        if ((i._id).equals(id)) {
           i.title = req.body.title;
           i.description = req.body.description; 
           i.courseName = req.body.courseName;
@@ -57,7 +58,7 @@ const addProjectOrCourse = async (req, res) => {
     
       // Update the document in the database
       const updatedDocument = await model.findOneAndUpdate(
-        { _id: userId },
+        { userId: userId },
         { $set: { [type + 's']: updated } },
         { new: true }
       );
@@ -78,7 +79,7 @@ const addProjectOrCourse = async (req, res) => {
       // Extract the type, id, and userId from the request body and params
       const { type,  userId} = req.body;
       const { id } = req.params;
-    
+      if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`ERROR`);
       // Determine which model to use based on the type
       const models = { project: projectModel, course: courseModel };
       const model = models[type];
@@ -95,7 +96,7 @@ const addProjectOrCourse = async (req, res) => {
     
       // Update the document in the database
       const updatedDocument = await model.findOneAndUpdate(
-        { _id: userId },
+        { userId: userId },
         { $set: { [type + 's']: updated } },
         { new: true }
       );

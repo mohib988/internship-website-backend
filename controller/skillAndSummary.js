@@ -1,6 +1,6 @@
 const { findOneAndUpdate } = require("../models/skillAndSummary.js")
 const skillAndSummaryModel=require("../models/skillAndSummary.js")
-
+const mongoose=require("mongoose")
 
 const createSkillAndSummary=async (req,res)=>{
     //  try {

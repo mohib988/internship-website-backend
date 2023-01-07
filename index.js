@@ -4,6 +4,7 @@ const cors=require("cors")
 const multer=require("multer")
 const userRouter=require("./routes/user.js")
 const companyRouter=require("./routes/company.js")
+const jobPostRouter=require("./routes/jobPost.js")
 const { application } = require("express")
 const app = express()
 app.use("/uploads",express.static("uploads"))
@@ -12,6 +13,7 @@ app.use(express.urlencoded({  extended: true }))
 app.use(cors());
 app.use("/user",userRouter)
 app.use("/company",companyRouter)
+app.use("/jobPost",jobPostRouter)
 
 const CONNECTION_URL = 'mongodb+srv://Mohib_7:Saaiq123@cluster0.75lldu5.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
