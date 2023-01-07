@@ -16,12 +16,12 @@ const createSkillAndSummary=async (req,res)=>{
 // }
     }
 const updateSkillAndSummary=async (req,res)=>{
-    //  try {
+     try {
     const {summary,skill,userId,type}
     =req.body
     if(type=="skill"){
    await skillAndSummaryModel.findOneAndUpdate({userId},{$push:{skill}},{new:true})
-        
+   
 } 
    else if(type==="summary"){
     await skillAndSummaryModel.findOneAndUpdate({userId},{$set:{summary}},{new:true})
@@ -33,9 +33,31 @@ else{
 const data=await skillAndSummaryModel.findOne({userId})
 res.status(201).json({data})
 
-// } 
+} 
+catch (error) {
+ res.status(400).json({error})   
+}
+    }
+
+
+
+const deleteSkill=async (req,res)=>{
+    //  try {
+    const {skillIndex,userId}
+    =req.body
+
+const data=await skillAndSummaryModel.findOne({userId})
+const updatedSkill=data.skill
+updatedSkill.splice(skillIndex,1)
+
+const updatedSkillAndSummary=await skillAndSummaryModel.findOneAndUpdate({userId},{$set:{skill:updatedSkill}},{new:true})
+res.status(201).json({data:updatedSkillAndSummary})
+
+} 
 // catch (error) {
 //  res.status(400).json({error})   
 // }
-    }
-module.exports={createSkillAndSummary,updateSkillAndSummary}
+//     }
+
+
+module.exports={createSkillAndSummary,updateSkillAndSummary,deleteSkill}

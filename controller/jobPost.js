@@ -1,4 +1,21 @@
 const postModel=require("../models/intershipPost.js")
+
+const getJobPost=async (req,res)=>{ 
+    try {
+    const {page}=req.query
+    const limit=8;
+    const start=(Number(page) -1)*limit
+
+
+    const JobPost=await postModel.find({}).limit(limit).skip(start)
+    
+    res.status(201).json({data:JobPost})
+} catch (error) {
+ res.status(404).json({error})   
+}
+ }
+
+
 const createJobPost=async (req,res)=>{ try {
     
     const {jobDescription,jobTitle,remote,location,paid,price,companyId,jobRequirement,contactNo}=req.body
@@ -50,4 +67,4 @@ const searchJobPost=async (req,res)=>{
 
     
     
-    module.exports={createJobPost,updateJobPost,deleteJobPost,searchJobPost}
+    module.exports={createJobPost,updateJobPost,deleteJobPost,searchJobPost,getJobPost}

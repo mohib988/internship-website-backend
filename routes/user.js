@@ -6,7 +6,7 @@ const {signup}=require("../controller/signupAndSignin.js")
 const {createProfile}=require("../controller/userInformation.js")
 const {addProjectOrCourse,updateProjectOrCourse,deleteProjectOrCourse,uploadMyPdf}=require("../controller/projectAndCourse.js")
 const {addEducationOrExperience,updateEducationOrExperience,deleteEducationOrExperience}=require("../controller/educationAndExperience.js")
-const {createSkillAndSummary,updateSkillAndSummary}=require("../controller/skillAndSummary.js")
+const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../controller/skillAndSummary.js")
 
 
 // router.post("/signup",upload.single("image"),signup)
@@ -20,6 +20,7 @@ router.post("/uploadpdf",uploadPdf.single("pdf"),uploadMyPdf)
 router.post("/updateeducationorexperience",updateEducationOrExperience)
 router.post("/createSkillAndSummary",createSkillAndSummary)
 router.post("/updateSkillAndSummary",updateSkillAndSummary)
+router.post("/deleteSkill",deleteSkill)
 // console.log(signup());
 // router.post("/signin",signin)
 module.exports=router;

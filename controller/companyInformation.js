@@ -1,5 +1,20 @@
 const companyInformation=require("../models/companyInformation.js")
 
+
+const getcompany=async (req,res)=>{ 
+    try {
+    const {page}=req.query
+    const limit=8;
+    const start=(Number(page) -1)*limit
+
+    const company=await companyInformation.find({}).limit(limit).skip(start)
+    
+    res.status(201).json({data:company})
+} catch (error) {
+ res.status(404).json({error})   
+}
+ }
+
 const createCompanyProfile=async (req,res)=>{
     try {
         
@@ -15,6 +30,6 @@ const createCompanyProfile=async (req,res)=>{
 
  
 }
-module.exports={createCompanyProfile}
+module.exports={createCompanyProfile,getcompany}
 
 
