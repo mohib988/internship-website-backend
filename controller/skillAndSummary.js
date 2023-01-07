@@ -3,17 +3,17 @@ const skillAndSummaryModel=require("../models/skillAndSummary.js")
 const mongoose=require("mongoose")
 
 const createSkillAndSummary=async (req,res)=>{
-    //  try {
+     try {
     
     const {summary,skill,userId}=req.body
     
     const createdSkillAndSummary=await skillAndSummaryModel.create({userId,summary,skill})
     
     res.status(201).json({data:createdSkillAndSummary})
-// } 
-// catch (error) {
-//  res.status(400).json({error})   
-// }
+} 
+catch (error) {
+ res.status(400).json({error})   
+}
     }
 const updateSkillAndSummary=async (req,res)=>{
      try {
