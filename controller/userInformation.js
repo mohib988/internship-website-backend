@@ -21,8 +21,10 @@ res.status(201).json({data:createInformation})
 
 
 const getUser=async (req,res)=>{
-const {userId}=req.params
-// const genderSmall=new RegExp(gender,"i")
+    try{
+
+        const {userId}=req.params
+        // const genderSmall=new RegExp(gender,"i")
 const user= await userInformation.findOne({userId:userId})
 const useremail= await userModel.findOne({_id:userId},"email")
 const summary=await skillAndSummaryModel.findOne({userId:userId})
@@ -33,7 +35,25 @@ const project=await projectModel.findOne({userId:userId})
 // result=Object.assign({}, user, summary);
 
 res.status(201).json({data:{...(user?._doc),...(summary?._doc),...(experience?._doc),...(project?._doc),...(course?._doc),...(education?._doc),...(useremail._doc)}})
+    }
+    catch(error){
+        res.status(404).json({error})
+    }
 }
-module.exports={createProfile,getUser}
 
+
+
+const getAllUser=async (req,res)=>{
+
+// const genderSmall=new RegExp(gender,"i")
+    const {page}=req.query
+    const limit=8;
+    const start=(Number(page) -1)*limit
+
+
+    const data=await userInformation.find({}).limit(limit).skip(start)
+
+res.status(201).json({data:data})
+}
+module.exports={createProfile,getUser,getAllUser}
 

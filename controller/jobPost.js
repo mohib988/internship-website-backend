@@ -7,7 +7,7 @@ const getJobPost=async (req,res)=>{
     const start=(Number(page) -1)*limit
 
 
-    const JobPost=await postModel.find({}).limit(limit).skip(start)
+    const JobPost=await postModel.find({}).limit(limit).skip(start).populate("companyId","name profilePicture")
     
     res.status(201).json({data:JobPost})
 } catch (error) {
