@@ -2,7 +2,7 @@ const mongoose =require("mongoose")
 const company=require("./companyInformation.js")
 
 const postModel=mongoose.Schema({
-companyId:{type:mongoose.SchemaTypes.ObjectId,required:true,ref:company},
+companyId:{type:mongoose.SchemaTypes.ObjectId,required:true,ref:"company Information"},
 jobTitle:{type: String,
   set: (val) => ucfirst(val)},
 jobDescription:{type:String,required:true},

@@ -2,7 +2,7 @@ const mongoose =require("mongoose")
 const user=require("./user.js")
 
 const skillAndSummaryModel=mongoose.Schema({
-userId:{type:String ,require:true,ref:user},
+userId:{type:String ,require:true,ref:"User"},
 summary:{type:String},
 skill:{type:[String]}
 

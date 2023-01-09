@@ -6,7 +6,7 @@ const {createJobPost,updateJobPost,searchJobPost,getJobPost}=require("../control
 
 router.post("/createJobPost",createJobPost)
 router.post("/updateJobPost/:id",updateJobPost)
-router.post("/search/query",searchJobPost)
-router.post("/getPost/query",getJobPost)
+router.get("/search/query",searchJobPost)
+router.get("/getPost/query",getJobPost)
 
 module.exports=router;

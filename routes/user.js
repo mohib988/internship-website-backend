@@ -3,7 +3,7 @@ const express =require("express"
 const router =express.Router();
 const {upload,uploadPdf}=require("../middleware/upload.js")
 const {signup}=require("../controller/signupAndSignin.js")
-const {createProfile}=require("../controller/userInformation.js")
+const {createProfile,getUser}=require("../controller/userInformation.js")
 const {addProjectOrCourse,updateProjectOrCourse,deleteProjectOrCourse,uploadMyPdf}=require("../controller/projectAndCourse.js")
 const {addEducationOrExperience,updateEducationOrExperience,deleteEducationOrExperience}=require("../controller/educationAndExperience.js")
 const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../controller/skillAndSummary.js")
@@ -17,7 +17,7 @@ router.post("/addProjectAndCourse",addProjectOrCourse)
 router.post("/deleteProjectAndCourse/:id",deleteProjectOrCourse)
 router.post("/updateProjectAndCourse/:id",updateProjectOrCourse)
 router.post("/uploadpdf",uploadPdf.single("pdf"),uploadMyPdf)
-
+router.get("/getuser/:userId",getUser)
 
 //* education and experience crud
 

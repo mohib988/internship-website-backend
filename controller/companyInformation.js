@@ -1,7 +1,7 @@
 const companyInformation=require("../models/companyInformation.js")
 const mongoose=require("mongoose")
 
-const getcompany=async (req,res)=>{ 
+const getCompany=async (req,res)=>{ 
     try {
     const {page}=req.query
     const limit=8;
@@ -16,10 +16,10 @@ const getcompany=async (req,res)=>{
  }
 const getOnecompany=async (req,res)=>{ 
     try {
-    const {userId}=req.body
+    const {id}=req.params;
 
 
-    const company=await companyInformation.findOne({userId})
+    const company=await companyInformation.findOne({_id:id})
     
     res.status(201).json({data:company})
 } catch (error) {
@@ -31,10 +31,10 @@ const getOnecompany=async (req,res)=>{
 const createCompanyProfile=async (req,res)=>{
     try {
         
-        const {companyName,companyDomain,phoneNo,address,country,numberOfEmployee,companyEmail,userId}=req.body
-        const companyPicture=req.file.path
+        const {name,field,phoneNo,address,country,numberOfEmployee,email,userId}=req.body
+        const profilePicture=req.file.path
         
-        const createdCompanyInformation=await companyInformation.create({userId,companyName,companyDomain,address,phoneNo,country,numberOfEmployee,companyEmail,companyPicture:companyPicture,})
+        const createdCompanyInformation=await companyInformation.create({userId,name,field,address,phoneNo,country,numberOfEmployee,email,profilePicture:profilePicture,})
         
         res.status(201).json({data:createdCompanyInformation})
     } catch (error) {
@@ -43,6 +43,6 @@ const createCompanyProfile=async (req,res)=>{
 
  
 }
-module.exports={createCompanyProfile,getcompany,getOnecompany}
+module.exports={createCompanyProfile,getCompany,getOnecompany}
 
 
