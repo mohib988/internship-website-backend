@@ -14,7 +14,7 @@ const signin=async (req,res)=>{
     if (!user) return res.status(404).json({ message: "User doesn't exist" });
 
 const token = jwt.sign({ email: user.email, id: user._id }, secret, { expiresIn: "1h" });
-res.status(200).json({result:user,token})
+res.status(200).json({data:{user,token}})
 
 } catch (error) {
   
@@ -35,7 +35,7 @@ res.status(201).json({image})
   
       const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
   
-      res.status(201).json({ result, token });
+      res.status(201).json({ data:{result,token}});
     } catch (error) {
       res.status(500).json({ message: "Error" });
       
@@ -43,4 +43,4 @@ res.status(201).json({image})
     }
   };
 
-module.exports={signup}
+module.exports={signup,signin}

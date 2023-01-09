@@ -2,15 +2,20 @@ const express =require("express"
 );
 const router =express.Router();
 const {upload,uploadPdf}=require("../middleware/upload.js")
-const {signup}=require("../controller/signupAndSignin.js")
+const {signup,signin}=require("../controller/signupAndSignin.js")
 const {createProfile,getUser,getAllUser}=require("../controller/userInformation.js")
 const {addProjectOrCourse,updateProjectOrCourse,deleteProjectOrCourse,uploadMyPdf}=require("../controller/projectAndCourse.js")
 const {addEducationOrExperience,updateEducationOrExperience,deleteEducationOrExperience}=require("../controller/educationAndExperience.js")
 const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../controller/skillAndSummary.js")
 
 
+
+router.post("/signin",signin)
+
 // router.post("/signup",upload.single("image"),signup)
 // router.post("/createprofile",upload.single("image"),createProfile)
+
+
 
 //* course and project crud
 router.post("/addProjectAndCourse",addProjectOrCourse)
