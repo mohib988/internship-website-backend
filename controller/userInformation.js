@@ -55,5 +55,15 @@ const getAllUser=async (req,res)=>{
 
 res.status(201).json({data:data})
 }
-module.exports={createProfile,getUser,getAllUser}
+
+const uploadCv=async (req,res)=>{
+
+// const genderSmall=new RegExp(gender,"i")
+
+const id=(req.body.id).toString()
+const cv=req.file.path
+const data=await userInformation.findOneAndUpdate({userId:id},{$set:{cv:cv}})
+res.status(201).json({data:data})
+}
+module.exports={createProfile,getUser,getAllUser,uploadCv}
 

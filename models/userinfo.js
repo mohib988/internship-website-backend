@@ -13,7 +13,8 @@ field:{type:String,required:true},
 // skills:{type:[String],required:true},
 phoneNo:{type:String,required:true},
 country:{type:String,required:true},
-address:{type:String}
+address:{type:String},
+cv:{type:String,default:""}
 
 })
 

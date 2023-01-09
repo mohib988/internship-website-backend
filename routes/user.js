@@ -3,7 +3,7 @@ const express =require("express"
 const router =express.Router();
 const {upload,uploadPdf}=require("../middleware/upload.js")
 const {signup,signin}=require("../controller/signupAndSignin.js")
-const {createProfile,getUser,getAllUser}=require("../controller/userInformation.js")
+const {createProfile,getUser,getAllUser, uploadCv}=require("../controller/userInformation.js")
 const {addProjectOrCourse,updateProjectOrCourse,deleteProjectOrCourse,uploadMyPdf}=require("../controller/projectAndCourse.js")
 const {addEducationOrExperience,updateEducationOrExperience,deleteEducationOrExperience}=require("../controller/educationAndExperience.js")
 const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../controller/skillAndSummary.js")
@@ -11,6 +11,7 @@ const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../cont
 
 
 router.post("/signin",signin)
+router.post("/uploadCv",upload.single("image"),uploadCv)
 
 // router.post("/signup",upload.single("image"),signup)
 // router.post("/createprofile",upload.single("image"),createProfile)
