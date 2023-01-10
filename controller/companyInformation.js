@@ -3,7 +3,14 @@ const mongoose=require("mongoose")
 
 const getCompany=async (req,res)=>{ 
     try {
-    const {page}=req.query
+    const {page,search}=req.query
+    console.log(page)
+    if (search){
+        const company=await companyInformation.find({name:{$regex:new RegExp(`${search}.*`,"gi")}})
+        console.log(search)
+        res.status(201).json({data:company})
+    }
+
     const limit=8;
     const start=(Number(page) -1)*limit
 
