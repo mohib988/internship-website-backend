@@ -8,7 +8,6 @@ const { json } = require("express");
 const addEducationOrExperience = async (req, res) => {
     try {
       
-
       req.body.startingDate = new Date(req.body.startingDate);
     req.body.endingDate = new Date(req.body.endingDate);
       const { type, userId } = req.body;

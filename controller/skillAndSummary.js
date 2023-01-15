@@ -16,11 +16,15 @@ catch (error) {
 }
     }
 const updateSkillAndSummary=async (req,res)=>{
-     try {
-    const {summary,skill,userId,type}
-    =req.body
+    //  try {
+        // const {userId}=req.params
+    const {summary,type,userId}=  req.body
+    
     if(type=="skill"){
-   await skillAndSummaryModel.findOneAndUpdate({userId},{$push:{skill}},{new:true})
+        console.log(req.body.skill)
+        const skill=(req.body.skill).split(/[,+/\s]+/)
+        console.log(skill)
+   await skillAndSummaryModel.findOneAndUpdate({userId},{$set:{skill}},{new:true})
    
 } 
    else if(type==="summary"){
@@ -33,10 +37,10 @@ else{
 const data=await skillAndSummaryModel.findOne({userId})
 res.status(201).json({data})
 
-} 
-catch (error) {
- res.status(400).json({error})   
-}
+// } 
+// catch (error) {
+//  res.status(400).json({error})   
+// }
     }
 
 

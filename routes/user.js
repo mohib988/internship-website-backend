@@ -14,7 +14,7 @@ router.post("/signin",signin)
 router.post("/uploadCv",upload.single("image"),uploadCv)
 
 // router.post("/signup",upload.single("image"),signup)
-// router.post("/createprofile",upload.single("image"),createProfile)
+router.post("/createprofile",upload.single("image"),createProfile)
 
 
 
@@ -35,7 +35,7 @@ router.post("/deleteeducationAndexperience/:id",deleteEducationOrExperience)
 
 //*skill and summary crud
 router.post("/createSkillAndSummary",createSkillAndSummary)
-router.post("/updateSkillAndSummary",updateSkillAndSummary)
+router.post("/SkillAndSummaryUpdate",updateSkillAndSummary)
 router.post("/deleteSkill",deleteSkill)
 // console.log(signup());
 // router.post("/signin",signin)
