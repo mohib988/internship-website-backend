@@ -12,39 +12,15 @@ const courseModel=require("../models/course.js")
 
 
 const createProfile=async (req,res)=>{
-let {gender,field,phoneNo,name,skill,summary,instituteName,startingDate,endingDate,instituteNameE,startingDateE,endingDateE,description,descriptionE,country,address}=req.body
+let {gender,field,phoneNo,name,skill,summary,country,address,userId}=req.body
 
 const image=req.file.path
 skill=skill.split(/[,+/\s]+/)
-endingDate=new Date(endingDate)
-startingDate=new Date(startingDate)
-startingDateE=new Date(startingDateE)
-endingDateE=new Date(endingDateE)
-const userId="63c16ca4c23c40eaa6ae72e5"
+
 // const genderSmall=new RegExp(gender,"i")
 const createInformation=await userInformation.create({name:name,gender,field:field,phoneNo:phoneNo,profilePicture:image,userId,country,address})
 
-const education= await educationModel.findOneAndUpdate(
-    { userId: userId },
-    { $push: { educations: {
-        instituteName:instituteNameE,
-        startingDate:startingDateE,
-        endingDate:endingDateE,
-        description:descriptionE,
-    } } },
-    { new: true, upsert: true }
-  );
 
-const experience= await experienceModel.findOneAndUpdate(
-    { userId: userId },
-    { $push: { experiences: {
-        instituteName,
-        startingDate,
-        endingDate,
-        description
-    } } },
-    { new: true, upsert: true }
-  );
 
   const createdSkillAndSummary=await skillAndSummaryModel.create({userId,summary,skill})
 res.status(201).json({data:createInformation})
