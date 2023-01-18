@@ -7,12 +7,26 @@ const getJobPost=async (req,res)=>{
     const start=(Number(page) -1)*limit
 
 
-    const JobPost=await postModel.find({}).limit(limit).skip(start).populate("companyId","name profilePicture userId")
+    const JobPost=await postModel.find({}).limit(limit).skip(start).populate("companyId","name profilePicture userId email")
     
     res.status(201).json({data:JobPost})
 } catch (error) {
  res.status(404).json({error})   
 }
+ }
+
+const getPostByArea=async (req,res)=>{ 
+    // try {
+    const {location}=req.body
+    const limit=8;
+
+
+    const JobPost=await postModel.find({location:new RegExp(`.*${location}.*`,"gi")}).limit(limit).populate("companyId","name profilePicture userId email")
+    
+    res.status(201).json({data:JobPost})
+// } catch (error) {
+//  res.status(404).json({error})   
+// }
  }
 
 
@@ -70,4 +84,4 @@ const searchJobPost=async (req,res)=>{
 
     
     
-    module.exports={createJobPost,updateJobPost,deleteJobPost,searchJobPost,getJobPost}
+    module.exports={createJobPost,updateJobPost,deleteJobPost,searchJobPost,getJobPost,getPostByArea}

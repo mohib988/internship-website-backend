@@ -7,6 +7,7 @@ const sendMail=async (req,res)=>{
 
     const {userId,postId,jobTitle,email}=req.body
     const user=await userInformation.findOne({userId:userId})
+    console.log(email)
     const summaryAndSkill=await skillAndSummaryModel.findOne({userId:userId})
     console.log({...summaryAndSkill.skill})
     const transporter = nodemailer.createTransport({
@@ -19,7 +20,7 @@ const sendMail=async (req,res)=>{
 
 const mailOptions = {
   from: 'qureshimohih819@gmail.com', 
-  to: 'mohibqureshi198@gmail.com', 
+  to: `${email}`, 
   subject: `${user.name} application for ${jobTitle}`, 
 html:
 `

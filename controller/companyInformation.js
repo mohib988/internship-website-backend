@@ -28,7 +28,7 @@ const getOnecompany=async (req,res)=>{
     const {id}=req.params;
 
 
-    const company=await companyInformation.findOne({_id:id})
+    const company=await companyInformation.findOne({userId:id})
     
     res.status(201).json({data:company})
 } catch (error) {

@@ -1,4 +1,5 @@
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+
 const secret = 'test';
 
 const authentication = async (req, res, next) => {
@@ -24,4 +25,4 @@ const authentication = async (req, res, next) => {
   }
 };
 
-export default authentication;
+module.exports=authentication
