@@ -82,6 +82,7 @@ const addEducationOrExperience = async (req, res) => {
       // Extract the type, id, and userId from the request body and params
       const { type,userId } = req.body;
       const { id } = req.params;
+  
       if (!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send(`No post with id}`);
     
       // Determine which model to use based on the type

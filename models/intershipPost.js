@@ -4,7 +4,8 @@ const company=require("./companyInformation.js")
 const postModel=mongoose.Schema({
 companyId:{type:mongoose.SchemaTypes.ObjectId,required:true,ref:"company Information"},
 jobTitle:{type: String,
-  set: (val) => ucfirst(val)},
+  // set: (val) => ucfirst(val)
+},
 jobDescription:{type:String,required:true},
 jobRequirements:{type:String},
 remote:{ type: Boolean,
@@ -27,7 +28,7 @@ paid:{
       return this.paid || !value;
     }
   },
-  contactNo:{type:Number}
-  
+  contactNo:{type:Number},
+  applied:{type:[mongoose.SchemaTypes.ObjectId ],required:false,ref:"user"}
 })
 module.exports=mongoose.model("Job Posts",postModel)

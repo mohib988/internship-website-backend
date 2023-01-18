@@ -7,7 +7,7 @@ const getJobPost=async (req,res)=>{
     const start=(Number(page) -1)*limit
 
 
-    const JobPost=await postModel.find({}).limit(limit).skip(start).populate("companyId","name profilePicture")
+    const JobPost=await postModel.find({}).limit(limit).skip(start).populate("companyId","name profilePicture userId")
     
     res.status(201).json({data:JobPost})
 } catch (error) {
@@ -16,16 +16,17 @@ const getJobPost=async (req,res)=>{
  }
 
 
-const createJobPost=async (req,res)=>{ try {
+const createJobPost=async (req,res)=>{ 
+    // try {
     
     const {jobDescription,jobTitle,remote,location,paid,price,companyId,jobRequirement,contactNo}=req.body
     
-    const createdJobPost=await postModel.create({jobTitle,jobDescription,jobRequirement,remote,location,companyId,contactNo,paid,price,contactNo})
+    const createdJobPost=await postModel.create({jobTitle,jobDescription,jobRequirement,remote:remote,location,companyId,contactNo,paid,price,contactNo})
     
     res.status(201).json({data:createdJobPost})
-} catch (error) {
- res.status.json({error})   
-}
+// } catch (error) {
+//  res.status(404).json({error})   
+// }
     }
 const updateJobPost=async (req,res)=>{ try {
     const {id}=req.params
@@ -40,14 +41,14 @@ const updateJobPost=async (req,res)=>{ try {
 
 const deleteJobPost=async (req,res)=>{ try {
     
-    // const {id,jobDescription,jobTitle,remote,location,paid,price,companyId,jobRequirement,contactNo}=req.body
+
     const {id}=req.params
 
     const updatedJobPost=await postModel.findByIdAndDelete({_id:id})
     
     res.status(201).json({data:"post successfully deleted"})
 } catch (error) {
- res.status.json({error})   
+ res.status(400).json({error})   
 }
  }
 //? what is the question

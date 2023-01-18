@@ -6,17 +6,19 @@ const getCompany=async (req,res)=>{
     const {page,search}=req.query
     console.log(page)
     if (search){
-        const company=await companyInformation.find({name:{$regex:new RegExp(`${search}.*`,"gi")}})
-        console.log(search)
+        const company=await companyInformation.find({name:new RegExp(`^${search}`,"gi")})
+        console.log(page)
         res.status(201).json({data:company})
     }
+else{
 
     const limit=8;
     const start=(Number(page) -1)*limit
-
-    const company=await companyInformation.find({}).limit(limit).skip(start)
+    
+    const company=await (await companyInformation.find({}).limit(limit).skip(start)).reverse()
     
     res.status(201).json({data:company})
+}
 } catch (error) {
  res.status(404).json({error})   
 }
@@ -42,7 +44,7 @@ const createCompanyProfile=async (req,res)=>{
         const profilePicture=req.file.path
         
         const createdCompanyInformation=await companyInformation.create({userId,name,field,address,phoneNo,country,numberOfEmployee,email,profilePicture:profilePicture,})
-        
+        console.log(createCompanyProfile)
         res.status(201).json({data:createdCompanyInformation})
     } catch (error) {
         res.status(404).json({data:error})    

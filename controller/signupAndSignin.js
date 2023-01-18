@@ -22,20 +22,18 @@ res.status(200).json({data:{user,token}})
   }
 }
 const signup= async (req,res)=>{
-    const { email, password, } = req.body;
-const image=req.file.path
-res.status(201).json({image})
+    const { email, password,type } = req.body;
     try {
       const oldUser = await UserModel.findOne({ email });
   
       if (oldUser) return res.status(400).json({ message: "User already exists" });
   
   
-      const result = await UserModel.create({ email, password: password});
+      const user = await UserModel.create({ email, password: password,type:type});
   
-      const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
+      const token = jwt.sign( { email: user.email, id: user._id }, secret, { expiresIn: "1h" } );
   
-      res.status(201).json({ data:{result,token}});
+      res.status(201).json({ data:{user,token}});
     } catch (error) {
       res.status(500).json({ message: "Error" });
       
