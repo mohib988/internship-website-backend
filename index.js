@@ -17,7 +17,7 @@ app.use("/user",userRouter)
 app.use("/company",companyRouter)
 app.use("/jobPost",jobPostRouter)
 
-const CONNECTION_URL =process.env.MONGODB_KEY;
+const CONNECTION_URL =process.env.CONNECTION_URL;
 const PORT = process.env.PORT|| 5000;
 mongoose.set('strictQuery', false)
 mongoose.connect(CONNECTION_URL)
