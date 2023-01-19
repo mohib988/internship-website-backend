@@ -3,6 +3,8 @@ const mongoose=require("mongoose")
 const cors=require("cors")
 const multer=require("multer")
 const userRouter=require("./routes/user.js")
+require('dotenv').config();
+
 const companyRouter=require("./routes/company.js")
 const jobPostRouter=require("./routes/jobPost.js")
 const { application } = require("express")
@@ -15,7 +17,7 @@ app.use("/user",userRouter)
 app.use("/company",companyRouter)
 app.use("/jobPost",jobPostRouter)
 
-const CONNECTION_URL = 'mongodb+srv://Mohib_7:Saaiq123@cluster0.75lldu5.mongodb.net/?retryWrites=true&w=majority';
+const CONNECTION_URL =process.env.MONGODB_KEY;
 const PORT = process.env.PORT|| 5000;
 mongoose.set('strictQuery', false)
 mongoose.connect(CONNECTION_URL)
