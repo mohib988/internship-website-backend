@@ -32,7 +32,7 @@ html:
   return `<li>${i}</li>`
 })}</ul>
 <h3>${user.name} cv</h3>
-<a href=${"https://internship-website-backend-a2le2.vercel.app/"+user.cv}>${user.name} cv</a>
+<a href=${"https://elegant-gabardine-dove.cyclic.app/"+user.cv}>${user.name} cv</a>
 
 
 `
