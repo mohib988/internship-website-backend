@@ -4,7 +4,7 @@ const cors=require("cors")
 const multer=require("multer")
 const userRouter=require("./routes/user.js")
 require('dotenv').config();
-
+const cors = require('cors');
 const companyRouter=require("./routes/company.js")
 const jobPostRouter=require("./routes/jobPost.js")
 const { application } = require("express")
@@ -13,6 +13,7 @@ app.use("/uploads",express.static("uploads"))
 app.use(express.json({  extended: true }))
 app.use(express.urlencoded({  extended: true }))
 app.use(cors());
+app.use(cors({ origin: 'https://intern-website.vercel.app' }));
 app.use("/user",userRouter)
 app.use("/company",companyRouter)
 app.use("/jobPost",jobPostRouter)
