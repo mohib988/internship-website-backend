@@ -65,8 +65,16 @@ const getAllUser=async (req,res)=>{
     const start=(Number(page) -1)*limit
 
 
-    const data=await userInformation.find({}).limit(limit).skip(start)
+    const user1=await userInformation.find({}).limit(limit).skip(start)
+    const skill1=await skillAndSummaryModel.find({}).limit(limit).skip(start)
 
+const data = user1.map(user => {
+        return {
+            ...user._doc,
+            skillAndSummary: skill1.filter(skill=> skill.userId.toString() === user.userId.toString())
+        }
+    });
+// const user=await s
 res.status(201).json({data:data})
 }
 

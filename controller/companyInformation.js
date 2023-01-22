@@ -37,6 +37,7 @@ const getOnecompany=async (req,res)=>{
  }
  
 
+
 const createCompanyProfile=async (req,res)=>{
     try {
         
@@ -52,6 +53,16 @@ const createCompanyProfile=async (req,res)=>{
 
  
 }
-module.exports={createCompanyProfile,getCompany,getOnecompany}
+const updateEmail=async(req,res)=>{
+    try{
+const {email,userId}=req.body
+const updateemail=await companyInformation.findOneAndUpdate({userId},{$set:{email:email}})
+res.status(201).json({data:updateemail})
+    }catch{
+        res.status(404).json({data:error})   
+    }
+
+}
+module.exports={createCompanyProfile,getCompany,getOnecompany,updateEmail}
 
 

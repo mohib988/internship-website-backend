@@ -13,7 +13,7 @@ const {createSkillAndSummary,updateSkillAndSummary,deleteSkill}=require("../cont
 
 router.post("/signin",signin)
 router.post("/signup",signup)
-router.post("/uploadCv",auth,upload.single("image"),uploadCv)
+router.post("/uploadCv",upload.single("image"),uploadCv)
 
 // router.post("/signup",upload.single("image"),signup)
 router.post("/createprofile",upload.single("image"),createProfile)
