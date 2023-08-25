@@ -11,8 +11,7 @@ const app = express()
 app.use("/uploads",express.static("uploads"))
 app.use(express.json({  extended: true }))
 app.use(express.urlencoded({  extended: true }))
-// app.use(cors());
-app.use(cors({ origin: 'https://intern-website.vercel.app' }));
+app.use(cors());
 app.use("/user",userRouter)
 app.use("/company",companyRouter)
 app.use("/jobPost",jobPostRouter)
